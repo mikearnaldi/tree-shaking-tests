@@ -2,8 +2,9 @@
   "name": "tree-shaking-test",
   "private": true,
   "scripts": {
-    "build": "rimraf dist && webpack",
-    "build-dev": "rimraf dist && cross-env DEV_MODE=1 webpack"
+    "build": "rimraf dist && webpack && prettier --write dist/bundle.js",
+    "build-dev": "rimraf dist && cross-env DEV_MODE=1 webpack",
+    "build-closure": "rimraf dist && webpack --config webpack-c.config.js && prettier --write dist/bundle.js"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -14,6 +15,7 @@
     "babel-loader": "^8.1.0",
     "benchmark": "^2.1.4",
     "cross-env": "^7.0.2",
+    "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "terser-webpack-plugin": "^3.0.1",
     "ts-loader": "^7.0.3",
@@ -25,7 +27,6 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@matechs/core": "file:../matechs-effect/shaking/core/build",
-    "@matechs/model": "file:../matechs-effect/shaking/model/build"
+    "@matechs/core": "^0.1.0"
   }
 }
