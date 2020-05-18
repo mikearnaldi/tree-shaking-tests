@@ -2,9 +2,8 @@
   "name": "tree-shaking-test",
   "private": true,
   "scripts": {
-    "build": "rimraf dist && webpack && prettier --write dist/bundle.js",
-    "build-dev": "rimraf dist && cross-env DEV_MODE=1 webpack",
-    "build-closure": "rimraf dist && webpack --config webpack-c.config.js && prettier --write dist/bundle.js"
+    "build": "rimraf dist && webpack && prettier --write dist/*.js",
+    "build-dev": "rimraf dist && cross-env DEV_MODE=1 webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
