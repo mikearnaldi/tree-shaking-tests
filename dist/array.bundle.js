@@ -11,14 +11,14 @@
       n.o(e, t) || Object.defineProperty(e, t, { enumerable: !0, get: r });
     }),
     (n.r = function (e) {
-      "undefined" !== typeof Symbol &&
+      "undefined" != typeof Symbol &&
         Symbol.toStringTag &&
         Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
         Object.defineProperty(e, "__esModule", { value: !0 });
     }),
     (n.t = function (e, t) {
       if ((1 & t && (e = n(e)), 8 & t)) return e;
-      if (4 & t && "object" === typeof e && e && e.__esModule) return e;
+      if (4 & t && "object" == typeof e && e && e.__esModule) return e;
       var r = Object.create(null);
       if (
         (n.r(r),
@@ -65,17 +65,17 @@
         let n = 0;
         const r = e.length,
           o = new Array(r);
-        for (let f = 0; f < r; f++) {
-          const r = t(e[f]);
-          (n += r.length), (o[f] = r);
+        for (let u = 0; u < r; u++) {
+          const r = t(e[u]);
+          (n += r.length), (o[u] = r);
         }
         const u = Array(n);
         let c = 0;
-        for (let f = 0; f < r; f++) {
-          const e = o[f],
-            t = e.length;
-          for (let n = 0; n < t; n++) u[n + c] = e[n];
-          c += t;
+        for (let e = 0; e < r; e++) {
+          const t = o[e],
+            n = t.length;
+          for (let e = 0; e < n; e++) u[e + c] = t[e];
+          c += n;
         }
         return u;
       },

@@ -11,14 +11,14 @@
       r.o(t, e) || Object.defineProperty(t, e, { enumerable: !0, get: n });
     }),
     (r.r = function (t) {
-      "undefined" !== typeof Symbol &&
+      "undefined" != typeof Symbol &&
         Symbol.toStringTag &&
         Object.defineProperty(t, Symbol.toStringTag, { value: "Module" }),
         Object.defineProperty(t, "__esModule", { value: !0 });
     }),
     (r.t = function (t, e) {
       if ((1 & e && (t = r(t)), 8 & e)) return t;
-      if (4 & e && "object" === typeof t && t && t.__esModule) return t;
+      if (4 & e && "object" == typeof t && t && t.__esModule) return t;
       var n = Object.create(null);
       if (
         (r.r(n),
@@ -480,10 +480,10 @@
         for (; e && (!this.interrupted || !this.isInterruptible()); )
           try {
             e = this[e.tag()](e);
-          } catch (r) {
+          } catch (t) {
             e = new l({
               _tag: "Abort",
-              abortedWith: r,
+              abortedWith: t,
               remaining: { _tag: "None" },
             });
           }
