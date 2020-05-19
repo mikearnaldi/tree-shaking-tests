@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "rimraf dist && webpack && prettier --write dist/*.js",
-    "build-dev": "rimraf dist && cross-env DEV_MODE=1 webpack"
+    "build-dev": "rimraf dist && cross-env DEV_MODE=1 webpack",
+    "bench": "tsc -p tsconfig.bench.json && node lib/index.js && node lib/fp.js && rimraf lib"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

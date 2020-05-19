@@ -63,6 +63,6 @@ benchmark
     console.log(String(event.target));
   })
   .on("complete", function (this: any) {
-    console.log(`Fastest is ${this.filter("fastest").map("name")}`);
+    console.log(`[effect] fastest is ${this.filter("fastest").map("name")}`);
   })
   .run({ async: true });
