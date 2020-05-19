@@ -27,6 +27,6 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@matechs/core": "^0.1.0"
+    "@matechs/core": "^0.1.2"
   }
 }

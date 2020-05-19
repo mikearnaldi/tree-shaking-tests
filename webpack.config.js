@@ -3,7 +3,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 
-module.exports = ["array", "effect", "either"].map((name) => ({
+module.exports = ["array", "effect", "either", "ord", "traverse", "semigroup", "show", "stream"].map((name) => ({
   entry: {
     [name]: `./src/${name}.ts`
   },

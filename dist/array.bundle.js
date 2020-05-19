@@ -50,13 +50,13 @@
       return Object.prototype.hasOwnProperty.call(e, t);
     }),
     (n.p = ""),
-    n((n.s = 4));
-})({
-  4: function (e, t, n) {
+    n((n.s = 0));
+})([
+  function (e, t, n) {
     "use strict";
     n.r(t),
       n.d(t, "a", function () {
-        return b;
+        return g;
       });
     function r(e) {
       return e;
@@ -91,12 +91,13 @@
     const l = (e, t) => e.map((e) => t(e)),
       s = (e) => (t) => l(t, e);
     const i = (e) => [e];
-    const a = c;
-    const p = i;
-    const d = u,
-      y = s;
-    var b = f(10, r);
-    a(b) &&
+    const a = c,
+      p = f;
+    const d = i;
+    const y = u,
+      b = s;
+    var g = p(10, r);
+    a(g) &&
       (function (e, t, n, r, o, u, c, f, l, s) {
         switch (arguments.length) {
           case 1:
@@ -121,14 +122,14 @@
             s(l(f(c(u(o(r(n(t(e)))))))));
         }
       })(
-        b,
-        y(function (e) {
+        g,
+        b(function (e) {
           return e + 1;
         }),
-        d(function (e) {
-          return p(e + 1);
+        y(function (e) {
+          return d(e + 1);
         }),
         console.log
       );
   },
-});
+]);

@@ -56,17 +56,33 @@
     "use strict";
     r.r(e);
     const n = { _tag: "None" };
-    function i(t) {
+    const i = {};
+    function s(t) {
+      const e = u(t);
+      return (t) => (r) => e(r, t);
+    }
+    const u = (t) => (e, r) => {
+      const n = Object.keys(e);
+      if (0 === n.length) return t.of(i);
+      let s = t.of({});
+      for (const i of n)
+        s = t.ap(
+          t.map(s, (t) => (e) => ((t[i] = e), t)),
+          r(i, e[i])
+        );
+      return s;
+    };
+    function a(t) {
       return { _tag: "Done", value: t };
     }
-    const s = (...t) =>
+    const h = (...t) =>
       t.length > 0
         ? { _tag: "Interrupt", errors: t, remaining: n }
         : { _tag: "Interrupt", remaining: n };
-    function u(t) {
+    function o(t) {
       return { _tag: "Raise", error: t, remaining: n };
     }
-    function a(t, e, r, n, i, s, u, a, h, l) {
+    function c(t, e, r, n, i, s, u, a, h, o) {
       switch (arguments.length) {
         case 1:
           return t;
@@ -87,10 +103,10 @@
         case 9:
           return h(a(u(s(i(n(r(e(t))))))));
         case 10:
-          return l(h(a(u(s(i(n(r(e(t)))))))));
+          return o(h(a(u(s(i(n(r(e(t)))))))));
       }
     }
-    class h {
+    class l {
       constructor(t) {
         this.a = t;
       }
@@ -98,7 +114,7 @@
         return "IPure";
       }
     }
-    class l {
+    class p {
       constructor(t) {
         this.e = t;
       }
@@ -106,7 +122,7 @@
         return "IRaised";
       }
     }
-    class o {
+    class d {
       constructor(t) {
         this.e = t;
       }
@@ -114,7 +130,7 @@
         return "ICompleted";
       }
     }
-    class c {
+    class f {
       constructor(t, e) {
         (this.e = t), (this.f = e);
       }
@@ -122,7 +138,7 @@
         return "IChain";
       }
     }
-    class p {
+    class g {
       constructor(t, e) {
         (this.e = t), (this.f = e);
       }
@@ -130,7 +146,7 @@
         return "IMap";
       }
     }
-    class d {
+    class m {
       constructor(t, e, r) {
         (this.inner = t), (this.failure = e), (this.success = r);
       }
@@ -138,17 +154,31 @@
         return "ICollapse";
       }
     }
-    class m {
+    class v {
+      constructor(t, e) {
+        (this.e = t), (this.r = e);
+      }
+      tag() {
+        return "IProvideEnv";
+      }
+    }
+    class I {
+      tag() {
+        return "IAccessEnv";
+      }
+    }
+    const y = "@matechs/core/Effect";
+    class b {
       constructor(t, e = null, r = null) {
         (this.value = t), (this.next = e), (this.previous = r);
       }
     }
-    class g {
+    class w {
       constructor(t = null, e = null) {
         (this.head = t), (this.tail = e);
       }
       prepend(t) {
-        const e = new m(t, this.head);
+        const e = new b(t, this.head);
         return (
           this.head && (this.head.previous = e),
           (this.head = e),
@@ -157,7 +187,7 @@
         );
       }
       append(t) {
-        const e = new m(t);
+        const e = new b(t);
         return this.head
           ? ((this.tail.next = e),
             (e.previous = this.tail),
@@ -188,12 +218,12 @@
         return null === this.head;
       }
     }
-    class v {
+    class x {
       constructor(t, e = null) {
         (this.value = t), (this.next = e);
       }
     }
-    class f {
+    class F {
       constructor(t = null, e = null) {
         (this.head = t),
           (this.tail = e),
@@ -204,11 +234,11 @@
         return null === this.head;
       }
       prepend(t) {
-        const e = new v(t, this.head);
+        const e = new x(t, this.head);
         return (this.head = e), this.tail || (this.tail = e), this;
       }
       append(t) {
-        const e = new v(t);
+        const e = new x(t);
         return this.head
           ? ((this.tail.next = e), (this.tail = e), this)
           : ((this.head = e), (this.tail = e), this);
@@ -224,10 +254,10 @@
         );
       }
     }
-    class I {
+    class S {
       constructor() {
         (this.running = !1),
-          (this.array = new f()),
+          (this.array = new F()),
           (this.isRunning = () => this.running);
       }
       run() {
@@ -255,8 +285,8 @@
         };
       }
     }
-    const y = (() => new I())();
-    class w {
+    const R = (() => new S())();
+    class _ {
       constructor(t, e) {
         (this.apply = t), (this.prev = e);
       }
@@ -264,7 +294,7 @@
         return "Frame";
       }
     }
-    class x {
+    class k {
       constructor(t, e, r) {
         (this.apply = t), (this.recover = e), (this.prev = r);
       }
@@ -272,7 +302,7 @@
         return "FoldFrame";
       }
     }
-    class F {
+    class P {
       constructor(t, e) {
         (this.apply = t), (this.prev = e);
       }
@@ -280,12 +310,12 @@
         return "MapFrame";
       }
     }
-    class b {
+    class O {
       constructor(t, e) {
         (this.interruptStatus = t), (this.prev = e);
       }
       apply(t) {
-        return this.interruptStatus.pop(), new h(t);
+        return this.interruptStatus.pop(), new l(t);
       }
       exitRegion() {
         this.interruptStatus.pop();
@@ -294,12 +324,12 @@
         return "InterruptFrame";
       }
     }
-    class S {
+    class j {
       constructor() {
         (this.completed = null),
           (this.interrupted = !1),
           (this.currentFrame = void 0),
-          (this.envStack = new g());
+          (this.envStack = new w());
       }
       isComplete() {
         return null !== this.completed;
@@ -355,11 +385,11 @@
         this.complete(t);
       }
       dispatchResumeInterrupt({ errors: t }) {
-        const e = this.handle(s(...(t || [])));
+        const e = this.handle(h(...(t || [])));
         e && this.loop(e);
       }
       resumeInterrupt(t) {
-        y.dispatch(this.dispatchResumeInterrupt.bind(this), { errors: t });
+        R.dispatch(this.dispatchResumeInterrupt.bind(this), { errors: t });
       }
       next(t) {
         var e;
@@ -371,22 +401,22 @@
         )
           return "MapFrame" === r.tag()
             ? void 0 === this.currentFrame
-              ? void this.complete(i(r.apply(t)))
-              : new h(r.apply(t))
+              ? void this.complete(a(r.apply(t)))
+              : new l(r.apply(t))
             : r.apply(t);
-        this.complete(i(t));
+        this.complete(a(t));
       }
       foldResume(t) {
         if ("Right" === t._tag) {
           const e = this.next(t.right);
           e && this.loop(e);
         } else {
-          const e = this.handle(u(t.left));
+          const e = this.handle(o(t.left));
           e && this.loop(e);
         }
       }
       resume(t) {
-        (this.cancelAsync = void 0), y.dispatch(this.foldResume.bind(this), t);
+        (this.cancelAsync = void 0), R.dispatch(this.foldResume.bind(this), t);
       }
       contextSwitch(t) {
         let e = !1;
@@ -411,10 +441,10 @@
       IProvideEnv(t) {
         return (
           this.envStack.append(t.r),
-          new d(
+          new m(
             t.e,
-            (t) => (this.envStack.deleteTail(), new o(t)),
-            (t) => (this.envStack.deleteTail(), new o(i(t)))
+            (t) => (this.envStack.deleteTail(), new d(t)),
+            (t) => (this.envStack.deleteTail(), new d(a(t)))
           )
         );
       }
@@ -424,12 +454,12 @@
       IPureOption(t) {
         return "Some" === t.a._tag
           ? this.next(t.a.value)
-          : this.handle(u(t.onEmpty()));
+          : this.handle(o(t.onEmpty()));
       }
       IPureEither(t) {
         return "Right" === t.a._tag
           ? this.next(t.a.right)
-          : this.handle(u(t.a.left));
+          : this.handle(o(t.a.left));
       }
       IRaised(t) {
         return (
@@ -446,14 +476,14 @@
         this.contextSwitch(t.e);
       }
       IChain(t) {
-        return (this.currentFrame = new w(t.f, this.currentFrame)), t.e;
+        return (this.currentFrame = new _(t.f, this.currentFrame)), t.e;
       }
       IMap(t) {
-        return (this.currentFrame = new F(t.f, this.currentFrame)), t.e;
+        return (this.currentFrame = new P(t.f, this.currentFrame)), t.e;
       }
       ICollapse(t) {
         return (
-          (this.currentFrame = new x(t.success, t.failure, this.currentFrame)),
+          (this.currentFrame = new k(t.success, t.failure, this.currentFrame)),
           t.inner
         );
       }
@@ -462,7 +492,7 @@
           void 0 === this.interruptRegionStack
             ? (this.interruptRegionStack = [t.int])
             : this.interruptRegionStack.push(t.int),
-          (this.currentFrame = new b(
+          (this.currentFrame = new O(
             this.interruptRegionStack,
             this.currentFrame
           )),
@@ -470,10 +500,10 @@
         );
       }
       IAccessRuntime(t) {
-        return new h(t.f(y));
+        return new l(t.f(R));
       }
       IAccessInterruptible(t) {
-        return new h(t.f(this.isInterruptible()));
+        return new l(t.f(this.isInterruptible()));
       }
       loop(t) {
         let e = t;
@@ -481,7 +511,7 @@
           try {
             e = this[e.tag()](e);
           } catch (t) {
-            e = new l({
+            e = new p({
               _tag: "Abort",
               abortedWith: t,
               remaining: { _tag: "None" },
@@ -490,7 +520,7 @@
         this.interrupted && e && this.resumeInterrupt();
       }
       start(t) {
-        y.dispatch(this.loop.bind(this), t);
+        R.dispatch(this.loop.bind(this), t);
       }
       interrupt() {
         this.interrupted ||
@@ -503,17 +533,39 @@
             }));
       }
     }
-    function R(t, e) {
-      return "IPure" === t.tag() ? e(t.a) : new c(t, e);
+    function A(t) {
+      return D(E(), t);
     }
-    function _(t, e) {
-      return "IPure" === t.tag() ? new h(e(t.a)) : new p(t, e);
+    function E() {
+      return new I();
     }
-    function k(t) {
-      return new h(t);
+    function C(t) {
+      return T(E(), t);
     }
-    function P(t, e) {
-      const r = new S();
+    function M(t, e) {
+      return q(t, e, (t, e) => t(e));
+    }
+    function T(t, e) {
+      return "IPure" === t.tag() ? e(t.a) : new f(t, e);
+    }
+    const H = { URI: y, map: D, of: U, ap: M, chain: T };
+    function D(t, e) {
+      return "IPure" === t.tag() ? new l(e(t.a)) : new g(t, e);
+    }
+    function N(t, e = "regular") {
+      return (r) =>
+        L((r) =>
+          "inverted" === e
+            ? Object.assign(Object.assign({}, t), r)
+            : Object.assign(Object.assign({}, r), t)
+        )(r);
+    }
+    const L = (t) => (e) => C((r) => new v(e, t(r)));
+    function U(t) {
+      return new l(t);
+    }
+    function W(t, e) {
+      const r = new j();
       return (
         e && r.onExit(e),
         r.start(t),
@@ -522,19 +574,27 @@
         }
       );
     }
-    var A;
-    a(
-      k(1),
-      ((A = function (t) {
-        return t + 1;
+    function q(t, e, r) {
+      return T(t, (t) => D(e, (e) => r(t, e)));
+    }
+    var z;
+    c(
+      { a: "foo", b: "bar" },
+      ((z = H),
+      (function (t) {
+        const e = s(t);
+        return (t) => e((e, r) => t(r));
+      })(z))(function (t) {
+        return A(function (e) {
+          return "".concat(t).concat(e.suffix.value);
+        });
       }),
-      (t) => _(t, A)),
-      ((t) => (e) => R(e, t))(function (t) {
-        return k(t + 1);
-      }),
+      N({ suffix: { value: "-ok" } }),
       function (t) {
-        return new Promise((e) => P(t, e));
+        return new Promise((e) => W(t, e));
       }
-    ).then(console.log);
+    ).then(function (t) {
+      console.log(t);
+    });
   },
 });

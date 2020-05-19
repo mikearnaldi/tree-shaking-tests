@@ -6,5 +6,5 @@
     "moduleResolution": "Node",
     "noEmit": true
   },
-  "include": ["bench/**/*"]
+  "include": ["bench/**/*", "src/**/*"]
 }

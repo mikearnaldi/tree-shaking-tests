@@ -2,8 +2,8 @@
   var t = {};
   function r(n) {
     if (t[n]) return t[n].exports;
-    var u = (t[n] = { i: n, l: !1, exports: {} });
-    return e[n].call(u.exports, u, u.exports, r), (u.l = !0), u.exports;
+    var o = (t[n] = { i: n, l: !1, exports: {} });
+    return e[n].call(o.exports, o, o.exports, r), (o.l = !0), o.exports;
   }
   (r.m = e),
     (r.c = t),
@@ -25,13 +25,13 @@
         Object.defineProperty(n, "default", { enumerable: !0, value: e }),
         2 & t && "string" != typeof e)
       )
-        for (var u in e)
+        for (var o in e)
           r.d(
             n,
-            u,
+            o,
             function (t) {
               return e[t];
-            }.bind(null, u)
+            }.bind(null, o)
           );
       return n;
     }),
@@ -55,49 +55,7 @@
   function (e, t, r) {
     "use strict";
     r.r(t);
-    const n = (e, t) => (u(e) ? e : t(e.right));
-    function u(e) {
-      switch (e._tag) {
-        case "Left":
-          return !0;
-        case "Right":
-          return !1;
-      }
-    }
-    function o(e) {
-      return { _tag: "Right", right: e };
-    }
-    var c;
-    !(function (e, t, r, n, u, o, c, i, a, f) {
-      switch (arguments.length) {
-        case 1:
-          return e;
-        case 2:
-          return t(e);
-        case 3:
-          return r(t(e));
-        case 4:
-          return n(r(t(e)));
-        case 5:
-          return u(n(r(t(e))));
-        case 6:
-          return o(u(n(r(t(e)))));
-        case 7:
-          return c(o(u(n(r(t(e))))));
-        case 8:
-          return i(c(o(u(n(r(t(e)))))));
-        case 9:
-          return a(i(c(o(u(n(r(t(e))))))));
-        case 10:
-          f(a(i(c(o(u(n(r(t(e)))))))));
-      }
-    })(
-      o(1),
-      ((c = function (e) {
-        return o(e + 1);
-      }),
-      (e) => n(e, c)),
-      console.log
-    );
+    const n = { show: (e) => JSON.stringify(e) };
+    console.log(n);
   },
 ]);
