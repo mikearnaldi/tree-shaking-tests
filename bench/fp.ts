@@ -11,10 +11,24 @@ export const fp = () => {
   );
 };
 
+export const fpdf = () => {
+  FA.array.map(
+    FA.makeBy(10, (x) => x),
+    (n) => n + 1
+  );
+};
+
 export const mat = () => {
   pipe(
     A.makeBy(10, (x) => x),
     A.map((n) => n + 1)
+  );
+};
+
+export const matdf = () => {
+  A.map_(
+    A.makeBy(10, (x) => x),
+    (n) => n + 1
   );
 };
 
@@ -24,14 +38,28 @@ benchmark
   .add(
     "matechs",
     () => {
-      fp();
+      mat();
+    },
+    { defer: false }
+  )
+  .add(
+    "matechs-df",
+    () => {
+      matdf();
     },
     { defer: false }
   )
   .add(
     "fp-ts",
     () => {
-      mat();
+      fp();
+    },
+    { defer: false }
+  )
+  .add(
+    "fp-ts-df",
+    () => {
+      fpdf();
     },
     { defer: false }
   )
